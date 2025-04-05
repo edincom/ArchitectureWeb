@@ -7,12 +7,18 @@ export default function SideBar() {
   
     return (
       <nav class="bg-sky-800 h-screen w-64 p-5 fixed top-0 left-0 rounded-r-2xl shadow-lg">
-        <ul class="flex flex-col space-y-4 text-gray-200 pt-10">
-          <li class={`border-l-4 ${active("/")} pl-3`}>
-            <a href="/">Home</a>
+        <ul class="flex flex-col space-y-10 text-gray-200 pt-10">
+          <li class={`border-l-10 ${active("/")} pl-3`}>
+            <a href="/" style="font-size: 20px;">Home</a>
           </li>
-          <li class={`border-l-4 ${active("/about")} pl-3`}>
-            <a href="/about">About</a>
+          <li class={`border-l-10 ${active("/search")} pl-3`}>
+            <a href="/search" style="font-size: 20px;">Search</a>
+          </li>
+          <li class={`border-l-10 ${active("/profile")} pl-3`}>
+            <a href="/profile" style="font-size: 20px;">Profile</a>
+          </li>
+          <li class={`border-l-10 ${active("/create")} pl-3`}>
+            <a href="/create" style="font-size: 20px;">Create</a>
           </li>
         </ul>
       </nav>
