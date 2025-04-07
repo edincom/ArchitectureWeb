@@ -5,6 +5,9 @@ import Nav from "~/components/Nav";
 import SideBar from "~/components/SideBar";
 import "./app.css";
 
+
+
+
 export default function App() {
   return (
     <Router

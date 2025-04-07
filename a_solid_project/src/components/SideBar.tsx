@@ -8,6 +8,7 @@ export default function SideBar() {
     return (
       <nav class="bg-sky-800 h-screen w-64 p-5 fixed top-0 left-0 rounded-r-2xl shadow-lg">
         <ul class="flex flex-col space-y-10 text-gray-200 pt-10">
+        <h1 class="max-6-xs text-4xl text-sky-200 font-thin uppercase my-10">STAK</h1>
           <li class={`border-l-10 ${active("/")} pl-3`}>
             <a href="/" style="font-size: 20px;">Home</a>
           </li>
@@ -19,6 +20,9 @@ export default function SideBar() {
           </li>
           <li class={`border-l-10 ${active("/create")} pl-3`}>
             <a href="/create" style="font-size: 20px;">Create</a>
+          </li>
+          <li class={`border-l-10 ${active("/create")} pl-3`}>
+            <a href="/login" style="font-size: 20px;">Login</a>
           </li>
         </ul>
       </nav>
