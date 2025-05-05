@@ -1,7 +1,9 @@
 import { login, loginAction } from '~/session/login';
+import LayoutCon from '~/components/LayoutCon';
 
 export default function Login() {
     return (
+      <LayoutCon protected>
       <main class="text-center mx-auto text-gray-700 p-4 max-w-md">
         <h1 class="text-6xl text-sky-700 font-thin uppercase my-16">WELCOME TO STAK</h1>
   
@@ -39,6 +41,7 @@ export default function Login() {
           </a>
         </div>
       </main>
+      </LayoutCon>
     );
   }
   

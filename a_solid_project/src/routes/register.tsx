@@ -1,11 +1,13 @@
 import { useSubmission } from '@solidjs/router';
 import { Show } from 'solid-js';
+import LayoutCon from '~/components/LayoutCon';
 import { registerAction } from '~/session/registration';
 
 export default function Register() {
   const submission = useSubmission(registerAction)
 
   return (
+    <LayoutCon protected>
     <main class="text-center mx-auto text-gray-700 p-4 max-w-md">
       <h1 class="text-6xl text-sky-700 font-thin uppercase my-16">WELCOME TO STAK</h1>
       <Show when={submission.error}>
@@ -63,5 +65,7 @@ export default function Register() {
           </a>
         </div>
     </main>
+    </LayoutCon>
+
   );
 }

@@ -22,7 +22,7 @@ export const getUser = query(async () => {
         const session = await getSession()
         if (!session.data.email) {
             console.log("No session data")
-            return "No data"
+            return null
         }
         console.log("Session data available")
         console.log(session.data.email)
