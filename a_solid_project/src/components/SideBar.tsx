@@ -1,9 +1,6 @@
-import { createAsync, useLocation } from "@solidjs/router";
-import { Show } from "solid-js";
-import { getUser } from "~/session/session";
+import { useLocation } from "@solidjs/router";
 
 export default function SideBar() {
-  const user = createAsync(() => getUser())
   const location = useLocation();
   const active = (path: string) =>
     path == location.pathname ? "border-sky-600" : "border-transparent hover:border-sky-600";
@@ -24,11 +21,6 @@ export default function SideBar() {
         <li class={`border-l-10 ${active("/create")} pl-3`}>
           <a href="/create" style="font-size: 20px;">Create</a>
         </li>
-        <Show when={!user()}>
-          <li class={`border-l-10 ${active("/create")} pl-3`}>
-            <a href="/login" style="font-size: 20px;">Login</a>
-          </li>
-        </Show>
       </ul>
     </nav>
   );
