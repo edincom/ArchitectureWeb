@@ -23,6 +23,7 @@ model Cards {
   id        String   @id @default(cuid())
   title     String
   owner     String   //The email address of the guy who made the flashcards
+  category  String
   shared    Boolean  //Indicates whether the cards are available on the profile of the guy
   content   Json     //Question + Answers
   createdAt DateTime @default(now())
