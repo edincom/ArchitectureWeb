@@ -29,7 +29,6 @@ export const getUser = query(async () => {
         return await prisma.user.findUniqueOrThrow({
             where: {email: session.data.email},
         })
-
     }   catch {
         return null
     }

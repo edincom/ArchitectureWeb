@@ -5,15 +5,23 @@
 
 import { createSignal } from "solid-js";
 
-export default function Sheet() {
+type Card = {
+  title: string;
+};
+
+type SheetProps = {
+  card: Card;
+};
+
+export default function Sheet(props: SheetProps) {
   const [clicked, setClicked] = createSignal(false);
-  
+
   return (
     <button
-    class="w-[300px] rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white" 
+      class="w-[300px] rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
       onClick={() => setClicked(true)}
     >
-      Course
+      {props.card.title}
     </button>
   );
 }
