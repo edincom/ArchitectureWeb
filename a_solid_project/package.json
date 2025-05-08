@@ -13,6 +13,7 @@
     "@tanstack/solid-query": "^5.73.3",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
+    "solid-app-router": "^0.4.2",
     "solid-js": "^1.9.2",
     "vinxi": "^0.5.3",
     "zod": "^3.24.2"

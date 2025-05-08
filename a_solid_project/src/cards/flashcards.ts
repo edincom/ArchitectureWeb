@@ -8,7 +8,7 @@ export async function getCardsFromDB(){
     let staks: any[] = [];
     try{
         staks = await prisma.cards.findMany();
-        console.log(staks);
+        //console.log(staks);
     }catch(err){
         console.error("Error", err);
     }

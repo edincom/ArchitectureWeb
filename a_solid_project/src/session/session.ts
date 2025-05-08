@@ -24,8 +24,8 @@ export const getUser = query(async () => {
             console.log("No session data")
             return null
         }
-        console.log("Session data available")
-        console.log(session.data.email)
+        //console.log("Session data available")
+        //console.log(session.data.email)
         return await prisma.user.findUniqueOrThrow({
             where: {email: session.data.email},
         })
