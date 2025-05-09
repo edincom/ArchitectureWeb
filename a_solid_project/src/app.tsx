@@ -10,10 +10,8 @@ export default function App() {
   return (
     <Router
       root={(props) => (
-        <div class="flex h-screen">
-          <div class="flex flex-col flex-1 ml-64">
+        <div>
             <Suspense>{props.children}</Suspense>
-          </div>
         </div>
       )}
     >

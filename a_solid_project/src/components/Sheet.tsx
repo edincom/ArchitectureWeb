@@ -1,9 +1,4 @@
-// This file represent a component that when clicked on will display a flash card system
-// The component is a button that when clicked will display a flash card system
-// The flash card system will display a question and an answer
 
-
-import { createSignal } from "solid-js";
 
 type Card = {
   title: string;
@@ -14,7 +9,6 @@ type SheetProps = {
 };
 
 export default function Sheet(props: SheetProps) {
-  const [clicked, setClicked] = createSignal(false);
 
   return (
     // <button

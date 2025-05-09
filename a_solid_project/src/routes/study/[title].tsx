@@ -20,13 +20,25 @@ export default function StudyPage() {
           Ready to study? Let's GO!
         </p>
         <div class="mt-6 flex justify-center gap-4">
-          <button class="bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-200">
+          {/* <button class="bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-200">
             Start
-          </button>
-          <button 
-          class="bg-white/20 hover:bg-white/30 text-white font-semibold py-3 px-6 rounded-full shadow-md transition-all duration-200">
+          </button> */}
+          <a
+            href={`/study/${params.title}/question`}
+            class="w-[300px] block text-center rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
+          >
+            Start
+          </a>
+          {/* <button
+            class="bg-white/20 hover:bg-white/30 text-white font-semibold py-3 px-6 rounded-full shadow-md transition-all duration-200">
             Back
-          </button>
+          </button> */}
+                    <a
+            href="/"
+            class="w-[300px] block text-center rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
+          >
+            Back
+          </a>
         </div>
       </div>
     </main>
