@@ -1,5 +1,5 @@
 export default function QuestionPage(){
     return (
-        <a>Hello</a>
+        <a>Pour l'instant y'a rien</a>
     )
 }

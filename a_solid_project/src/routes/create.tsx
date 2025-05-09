@@ -4,10 +4,10 @@ import Layout from "~/components/Layout";
 import { generateAction } from "~/cards/generate";
 
 export default function Create() {
-    const submission = useSubmission(generateAction)
-    return (
+  const submission = useSubmission(generateAction)
+  return (
     <Layout protected>
-      <main class="text-center text-gray-700 p-8 max-w-md bg-white rounded-lg shadow-lg -ml-1">
+      <main class="mt-20 mx-auto text-gray-700 p-8 max-w-md bg-white rounded-lg shadow-lg">
         <h1 class="text-4xl md:text-6xl text-sky-700 font-thin uppercase mb-8">Create your flashcards</h1>
         <Show when={submission.error}>
           <p class="text-red-500 mb-4">Error: {submission.error.message}</p>
@@ -46,8 +46,17 @@ export default function Create() {
             Generate
           </button>
         </form>
+
       </main>
+      <div class="mt-4">
+        <Show when={submission.pending}>
+          <div class="loader mx-auto" />
+        </Show>
+        <Show when={submission.result && !submission.pending}>
+          <p class="text-green-600 text-sm text-center">Done!</p>
+        </Show>
+      </div>
     </Layout>
 
-    );
+  );
 }

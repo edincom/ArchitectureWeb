@@ -1,15 +1,9 @@
-// import { useParams } from "@solidjs/router";
-
-// export default function StudyPage() {
-//   const params = useParams();
-//   return <div>Stak  {params.title}</div>;
-// }
-
+import { createResource } from "solid-js";
 import { useParams } from "@solidjs/router";
+import { getCardsFromDB } from "~/cards/flashcards";
 
 export default function StudyPage() {
   const params = useParams();
-
   return (
     <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-purple-500 text-white p-8">
       <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 max-w-xl w-full text-center border border-white/20">
