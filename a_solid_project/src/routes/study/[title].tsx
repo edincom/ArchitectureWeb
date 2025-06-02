@@ -42,17 +42,9 @@ export default function StudyPage() {
   return (
     <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-purple-500 text-white p-8">
       <div class="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl p-8 max-w-xl w-full text-center border border-white/20">
-        <h1 class="text-5xl font-extrabold mb-6 tracking-tight">
-          Studying <span class="text-yellow-300">{card()?.title}</span>!
-        </h1>
-        <p class="text-lg text-white/80 mb-4">
-          Ready to study? Let's GO!
-        </p>
-
-        {/* Conditionally render Start button or question based on isStarted */}
         <Show when={!isStarted()} fallback={(
           <div class="mt-8 bg-white/20 backdrop-blur-md p-8 rounded-xl">
-            <p>{currentQuestion()?.question}</p>
+            <p class="text-2xl font-semibold">{currentQuestion()?.question}</p>
             <Show when={showAnswer()}>
               <p class="mt-4 text-white">{currentQuestion()?.answer}</p>
             </Show>
@@ -69,10 +61,24 @@ export default function StudyPage() {
               >
                 Next Question
               </button>
+              <div>
+                <a
+                  href='/'
+                  class="w-[100px] block text-center rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
+                >
+                  Done
+                </a>
+              </div>
             </div>
           </div>
         )}>
-          {/* Start Button */}
+
+          <h1 class="text-5xl font-extrabold mb-6 tracking-tight">
+            Studying <span class="text-yellow-300">{card()?.title}</span>!
+          </h1>
+          <p class="text-lg text-white/80 mb-4">
+            Ready to study? Let's GO!
+          </p>
           <div class="mt-6 flex justify-center gap-4">
             <button
               class="w-[300px] block text-center rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"

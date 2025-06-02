@@ -1,8 +1,8 @@
-import { getCards } from "~/cards/flashcards";
+import { getCards, getCardsUser } from "~/cards/flashcards";
 import Layout from "~/components/Layout";
 import Sheet from "~/components/Sheet";
-import { logoutAction } from "~/session/session";
-import { createAsyncStore, type RouteDefinition, } from "@solidjs/router";
+import { getUser, logoutAction } from "~/session/session";
+import { createAsync, createAsyncStore, type RouteDefinition, } from "@solidjs/router";
 
 export const route = {
   preload() {
@@ -11,7 +11,9 @@ export const route = {
 } satisfies RouteDefinition;
 
 export default function Home() {
-  const cards = createAsyncStore(() => getCards(), {
+  const user = createAsync(() => getUser());
+  const owner = () => user()?.email
+  const cards = createAsyncStore(() => getCardsUser(owner()), {
     initialValue: [],
   });
   console.log("cards", cards());

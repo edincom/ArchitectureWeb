@@ -32,6 +32,22 @@ export default function Register() {
           />
 
           <input
+            type="text"
+            name="number"
+            placeholder="Phone number"
+            class="p-3 border border-gray-300 rounded"
+            required
+          />
+
+          <input
+            type="text"
+            name="profession"
+            placeholder="Profession"
+            class="p-3 border border-gray-300 rounded"
+            required
+          />
+
+          <input
             type="password"
             name="password"
             placeholder="Password"

@@ -34,6 +34,14 @@ export const getCardById = query(async (id: string) => {
   return await prisma.cards.findUnique({ where: { id } });
 }, 'getCardById');
 
+//Get user info from the DB
+export const getUserInfo = query(async(email:string) => {
+    'use server';
+    return await prisma.user.findUnique({where: {email}});
+}, 'getUserInfo');
+
+
+
 //Add a stak to the database
 export const addCard = query(async(form : FormData, extraData : any) => {
     'use server'
@@ -58,7 +66,7 @@ export const getCardsUser = query(async(owner : string) => {
     return await prisma.cards.findMany({where : {owner}})
 }, 'getCardsUser')
 
-export const getCardsUserAdtion = action(getCardsUser)
+export const getCardsUserAction = action(getCardsUser)
 
 //Delete a stak from the database from its id
 export const deleteCards = query(async(id: string)=>{

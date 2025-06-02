@@ -10,6 +10,8 @@ export const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   name: z.string().min(5),
   password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
+  phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, {message: "Invalid phone number format"}),
+  profession: z.string()
 });
 
 export async function register(form: FormData) {
@@ -21,6 +23,8 @@ export async function register(form: FormData) {
       email: form.get('email'),
       name: form.get('name'),
       password: form.get('password'),
+      phone: form.get('number'),
+      profession: form.get('profession')
     });
   } catch {
     throw new Error('Données invalides')
@@ -34,6 +38,8 @@ export async function register(form: FormData) {
         email: user.email,
         name: user.name,
         password: user.password,
+        phone: user.phone,
+        profession: user.profession
       }
     });
 
