@@ -34,12 +34,13 @@ export default function Sheet(props: SheetProps) {
       </a>
 
       {props.showDelete && (
-        <form method="post" class="absolute top-2 right-2">
+        <form method="post" class="absolute -top-3 -right-3 z-10">
           <button
             formAction={deleteCardsAction.with(props.card.id)}
-            class="text-xs bg-red-500 text-white px-2 py-1 rounded"
+            class="flex items-center gap-1 rounded-full bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-300 text-white text-xs px-3 py-1 shadow-md transition-all"
+            title="Delete card"
           >
-            Delete
+            🗑️
           </button>
         </form>
       )}
