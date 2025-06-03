@@ -2,20 +2,26 @@ import { createAsyncStore, RouteDefinition, useParams } from "@solidjs/router";
 import { createSignal, Show } from "solid-js";
 import { getCardById } from "~/cards/flashcards";
 
+export const route = {
+  preload({ params }) {
+    const id = decodeURIComponent(params.title ?? "");
+    return getCardById(id);
+  },
+} satisfies RouteDefinition;
+
 export default function StudyPage() {
-  const [isStarted, setIsStarted] = createSignal(false); // Controls if the question is displayed
-  const [showAnswer, setShowAnswer] = createSignal(false); // Controls if the answer is shown
-  const [currentQuestion, setCurrentQuestion] = createSignal(null); // Holds the current random question
+  const [isStarted, setIsStarted] = createSignal(false);               // Controls if the question is displayed
+  const [showAnswer, setShowAnswer] = createSignal(false);             // Controls if the answer is shown
+  const [currentQuestion, setCurrentQuestion] = createSignal(null);    // Holds the current random question
+  
   const params = useParams();
   const id = decodeURIComponent(params.title ?? "");
-
   const card = createAsyncStore(() => getCardById(id), {
     initialValue: null,
   });
-
   const cardContent = () => card()?.content;
 
-  // Function to get a random question
+
   const getRandomQuestion = () => {
     const content = cardContent();
     if (content?.question_answers && content.question_answers.length > 0) {
@@ -25,19 +31,13 @@ export default function StudyPage() {
     return null;
   };
 
-  // Function to set a new random question
   const getNextQuestion = () => {
     const question = getRandomQuestion();
     setCurrentQuestion(question);
     setShowAnswer(false); // Reset answer visibility when changing questions
   };
 
-  const route = {
-    preload({ params }) {
-      const id = decodeURIComponent(params.title ?? "");
-      return getCardById(id);
-    },
-  } satisfies RouteDefinition;
+
 
   return (
     <main class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-purple-500 text-white p-8">
@@ -51,13 +51,13 @@ export default function StudyPage() {
             <div class="mt-6 flex justify-center gap-4">
               <button
                 class="w-[200px] block text-center rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
-                onClick={() => setShowAnswer(true)} // Show the answer
+                onClick={() => setShowAnswer(true)}
               >
                 Show Answer
               </button>
               <button
                 class="w-[200px] block text-center rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
-                onClick={getNextQuestion} // Load the next question
+                onClick={getNextQuestion}
               >
                 Next Question
               </button>
@@ -84,7 +84,7 @@ export default function StudyPage() {
               class="w-[300px] block text-center rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
               onClick={() => {
                 setIsStarted(true);
-                getNextQuestion(); // Load the first question when starting
+                getNextQuestion();
               }}
             >
               Start

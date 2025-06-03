@@ -3,7 +3,7 @@ import Layout from "~/components/Layout";
 import Sheet from "~/components/Sheet";
 import { getUser, logoutAction } from "~/session/session";
 import { createAsync, createAsyncStore, useSubmission, type RouteDefinition, } from "@solidjs/router";
-import { For, Show } from "solid-js";
+import {  For } from "solid-js";
 
 export const route = {
   preload() {
@@ -25,17 +25,17 @@ export default function Home() {
       return !submissions.some((sub) => sub.input[0] === card.id);
     });
 
-  //console.log("cards", cards());
-
   return (
     <Layout protected>
       <main class="text-center mx-auto text-gray-700 p-4">
         <h1 class="max-6-xs text-6xl text-sky-700 font-thin uppercase my-16">STAK</h1>
+
         <div class="flex flex-col flex-1 gap-4">
           <For each={filteredCards()}>
             {(card) => <Sheet card={card} showDelete />}
           </For>
         </div>
+
         <form method="post" action={logoutAction}>
           <input type="submit" value="Log out" />
         </form>

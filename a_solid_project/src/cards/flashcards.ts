@@ -87,3 +87,20 @@ export const getQuestion = query(async(id : string) =>{
 
 export const getQuestionAction = action(getQuestion)
 
+
+// Add a function modify the user data (phone number, Name, Profession)
+export const updateUserInfo = async (form: FormData) => {
+  'use server'
+
+  const email = form.get("email") as string;
+  const name = form.get("name") as string;
+  const phone = form.get("phone") as string;
+  const profession = form.get("profession") as string;
+
+  await prisma.user.update({
+    where: { email },
+    data: { name, phone, profession }
+  });
+};
+
+export const updateUserInfoAction = action(updateUserInfo);
