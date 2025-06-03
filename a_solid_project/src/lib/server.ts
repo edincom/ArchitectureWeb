@@ -13,7 +13,6 @@ const flashcardSchema = z.object({
 
 })
 
-
 export const getCards = query(async() => {
     'use server'
     return await prisma.cards.findMany({
@@ -41,7 +40,6 @@ export const getUserInfo = query(async(email:string) => {
 
 
 
-
 //Get the staks from a specific user from the database
 export const getCardsUser = query(async(owner : string) => {
     'use server'
@@ -49,6 +47,7 @@ export const getCardsUser = query(async(owner : string) => {
 }, 'getCardsUser')
 
 export const getCardsUserAction = action(getCardsUser)
+
 
 //Delete a stak from the database from its id
 export const deleteCards = query(async(id: string)=>{
