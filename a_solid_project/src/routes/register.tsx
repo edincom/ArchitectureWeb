@@ -1,6 +1,6 @@
 import { useSubmission } from '@solidjs/router';
 import { Show } from 'solid-js';
-import { registerAction } from '~/session/registration';
+import { registerAction } from '~/lib/session/registration';
 import LayoutCon from '~/components/LayoutCon';
 
 export default function Register() {

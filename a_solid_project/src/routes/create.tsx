@@ -2,7 +2,7 @@ import { createAsync, createAsyncStore, useSubmission } from "@solidjs/router";
 import { Show } from "solid-js";
 import Layout from "~/components/Layout";
 import { generateAction } from "~/lib/ai";
-import { getUser } from "~/session/session";
+import { getUser } from "~/lib/session/session";
 
 export default function Create() {
   const user = createAsync(() => getUser());

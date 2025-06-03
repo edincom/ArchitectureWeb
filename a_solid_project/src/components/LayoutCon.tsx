@@ -1,6 +1,6 @@
 import { createAsync } from "@solidjs/router"
 import { JSXElement, Show } from "solid-js"
-import { getUser } from "~/session/session"
+import { getUser } from "~/lib/session/session"
 
 type LayoutProps = {
     children: JSXElement

@@ -1,4 +1,4 @@
-import { login, loginAction } from '~/session/login';
+import { login, loginAction } from '~/lib/session/login';
 import LayoutCon from '~/components/LayoutCon';
 
 export default function Login() {

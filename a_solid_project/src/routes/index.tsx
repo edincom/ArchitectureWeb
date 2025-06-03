@@ -1,7 +1,7 @@
 import { deleteCardsAction, getCards, getCardsUser } from "~/lib/server";
 import Layout from "~/components/Layout";
 import Sheet from "~/components/Sheet";
-import { getUser, logoutAction } from "~/session/session";
+import { getUser, logoutAction } from "~/lib/session/session";
 import { createAsync, createAsyncStore, useSubmission, type RouteDefinition, } from "@solidjs/router";
 import { For } from "solid-js";
 

@@ -1,7 +1,7 @@
 import { createAsync, createAsyncStore, useSubmission } from "@solidjs/router";
 import { getUserInfo, updateUserInfoAction } from "~/lib/server";
 import Layout from "~/components/Layout";
-import { getUser } from "~/session/session";
+import { getUser } from "~/lib/session/session";
 
 
 export default function Profile() {
