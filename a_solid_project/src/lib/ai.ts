@@ -48,35 +48,34 @@ export const cardSchema = z.object({
     title: z.string(),
     category: z.string(),
     content: z.string(),
+    owner: z.string()
 })
 
 export async function generate(form: FormData) {
     'use server';
     let card: z.infer<typeof cardSchema>;
-  
     try {
       console.log("🟡 Starting form parsing...");
       card = cardSchema.parse(Object.fromEntries(form.entries()));
+      
       console.log("🟢 Form parsed successfully:", card);
     } catch (err: any) {
       console.error("🔴 Zod validation failed:", err);
       throw err;
     }
-  
     const question_data = await generateQuestions(card.content);
     console.log("🧠 Generated questions:", question_data);
-  
+    console.log(card.owner)
     try {
       const newCard = await prisma.cards.create({
         data: {
           title: card.title,
-          owner: 'edincomor@gmail.com',
+          owner: card.owner,
           category: card.category,
           shared: true,
           content: question_data,
         }
       });
-  
       console.log("✅ New card created:", newCard);
       console.log("📁 Using database file from:", process.env.DATABASE_URL);
       console.log("🔍 Full resolved DB path:", path.resolve(process.env.DATABASE_URL?.replace("file:", "") ?? "UNKNOWN"));

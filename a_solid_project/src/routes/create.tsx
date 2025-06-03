@@ -1,9 +1,12 @@
-import { useSubmission } from "@solidjs/router";
+import { createAsync, createAsyncStore, useSubmission } from "@solidjs/router";
 import { Show } from "solid-js";
 import Layout from "~/components/Layout";
 import { generateAction } from "~/lib/ai";
+import { getUser } from "~/session/session";
 
 export default function Create() {
+  const user = createAsync(() => getUser());
+  const mail = () => user()?.email
   const submission = useSubmission(generateAction)
   return (
     <Layout protected>
@@ -14,6 +17,7 @@ export default function Create() {
         </Show>
 
         <form method='post' class="flex flex-col gap-4" action={generateAction}>
+          <input type="hidden" name="owner" value={mail()} />
           <input
             type="title"
             name="title"

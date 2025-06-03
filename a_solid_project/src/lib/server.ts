@@ -14,7 +14,6 @@ const flashcardSchema = z.object({
 })
 
 
-//Get all the stak from the database
 export const getCards = query(async() => {
     'use server'
     return await prisma.cards.findMany({
@@ -42,23 +41,6 @@ export const getUserInfo = query(async(email:string) => {
 
 
 
-//Add a stak to the database
-export const addCard = query(async(form : FormData, extraData : any) => {
-    'use server'
-    const content = extraData.content
-    const flashcard = flashcardSchema.parse({
-        title : form.get('title'),
-        owner : "edincomor@gmail.com",
-        category : form.get('category'),
-        shared : true,
-        content : content
-    })
-    return await prisma.cards.create({data : flashcard})
-}, 'addCard')
-
-
-
-
 
 //Get the staks from a specific user from the database
 export const getCardsUser = query(async(owner : string) => {
@@ -76,16 +58,6 @@ export const deleteCards = query(async(id: string)=>{
 
 export const deleteCardsAction = action(deleteCards);
 
-//Get a random question from a specific stak from the database
-export const getQuestion = query(async(id : string) =>{
-    'use server'
-    const json = await prisma.cards.findUnique({where : {id}})
-    const content = json?.content
-    console.log(content)
-    return content
-}, 'getQuestion')
-
-export const getQuestionAction = action(getQuestion)
 
 
 // Add a function modify the user data (phone number, Name, Profession)
