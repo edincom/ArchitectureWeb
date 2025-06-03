@@ -1,4 +1,4 @@
-import { deleteCardsAction } from "~/cards/flashcards";
+import { deleteCardsAction } from "~/lib/server";
 
 type Card = {
   id: string;
@@ -12,19 +12,19 @@ type SheetProps = {
 
 export default function Sheet(props: SheetProps) {
   return (
-    <div class="relative w-[300px] text-center">
+    <div class="relative aspect-square w-full max-w-[250px] rounded-2xl overflow-hidden bg-gradient-to-br from-sky-600 to-blue-400 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 group">
       <a
         href={`/study/${props.card.id}`}
-        class="block rounded-full bg-gradient-to-b from-purple-900 to-purple-300 border-2 border-gray-300 focus:border-gray-400 active:border-gray-400 px-[2rem] py-[1rem] text-white"
+        class="flex items-center justify-center w-full h-full p-6 text-xl font-semibold tracking-wide text-white text-center"
       >
         {props.card.title}
       </a>
 
       {props.showDelete && (
-        <form method="post" class="absolute -top-3 -right-3 z-10">
+        <form method="post" class="absolute top-2 right-2 z-10">
           <button
             formAction={deleteCardsAction.with(props.card.id)}
-            class="flex items-center gap-1 rounded-full bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-300 text-white text-xs px-3 py-1 shadow-md transition-all"
+            class="flex items-center justify-center w-8 h-8 rounded-full bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-300 text-white text-sm shadow-md transition-all"
             title="Delete card"
           >
             🗑️
