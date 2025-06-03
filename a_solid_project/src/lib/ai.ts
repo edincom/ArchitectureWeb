@@ -1,8 +1,47 @@
-import { z } from 'zod';
-import { PrismaClient } from '@prisma/client'
-import { action, redirect } from '@solidjs/router';
-import { generateQuestions } from './ai';
+import { PrismaClient } from "@prisma/client";
+import { action, redirect } from "@solidjs/router";
+import OpenAI from "openai";
+import { z } from "zod";
 import path from 'path';
+
+export async function generateQuestions(userContent: string) {
+  const apiKey = process.env.OPENAI_KEY;
+  const client = new OpenAI({
+    apiKey,
+    baseURL: "https://api.deepseek.com",
+  });
+  const systemPrompt = `
+    You are a helpful assistant. The user will provide a text passage (e.g., an article or multiple paragraphs).
+    Your task is to read the content and generate a list of multiple question-answer pairs based on it.
+
+    Each question should test comprehension or factual recall from the passage. Each answer should be concise and accurate.
+
+    Return the output strictly as a JSON array of objects with the format:
+    
+    {
+    "question_answers": [
+        {
+        "question": "Your question here ?",
+        "answer": "The correct answer here"
+        },
+        ...
+    ]
+    }
+    `;
+  const messages: Array<{ role: "system" | "user" | "assistant"; content: string; name?: string }> = [
+    { role: "system", content: systemPrompt },
+    { role: "user", content: userContent },
+  ];
+  const response = await client.chat.completions.create({
+    model: "deepseek-chat",
+    messages: messages,
+    response_format: { type: "json_object" }
+  });
+  const parsed = JSON.parse(response.choices[0].message.content ?? "");
+  console.log(JSON.stringify(parsed, null, 2));
+  return parsed
+}
+
 
 const prisma = new PrismaClient();
 export const cardSchema = z.object({
@@ -39,8 +78,6 @@ export async function generate(form: FormData) {
       });
   
       console.log("✅ New card created:", newCard);
-  
-      // DEBUG: Log DB file location
       console.log("📁 Using database file from:", process.env.DATABASE_URL);
       console.log("🔍 Full resolved DB path:", path.resolve(process.env.DATABASE_URL?.replace("file:", "") ?? "UNKNOWN"));
     } catch (err: any) {
@@ -48,7 +85,6 @@ export async function generate(form: FormData) {
       throw err;
     }
 }
-
 
 export const generateAction = action(async (formData: FormData) => {
     'use server'

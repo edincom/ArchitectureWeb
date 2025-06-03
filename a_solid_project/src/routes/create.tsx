@@ -1,7 +1,7 @@
 import { useSubmission } from "@solidjs/router";
 import { Show } from "solid-js";
 import Layout from "~/components/Layout";
-import { generateAction } from "~/cards/generate";
+import { generateAction } from "~/lib/ai";
 
 export default function Create() {
   const submission = useSubmission(generateAction)
