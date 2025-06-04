@@ -3,6 +3,17 @@ import { deleteCardsAction } from "~/lib/server";
 type Card = {
   id: string;
   title: string;
+  owner: string;
+  category: string;
+  shared: boolean;
+  content: {
+    question_answers: Array<{
+      question: string;
+      answer: string;
+    }>;
+  };
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 type SheetProps = {

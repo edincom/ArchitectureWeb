@@ -4,6 +4,15 @@ import OpenAI from "openai";
 import { z } from "zod";
 import path from 'path';
 
+interface QuestionAnswer {
+  question: string;
+  answer: string;
+}
+
+interface GeneratedContent {
+  question_answers: QuestionAnswer[];
+}
+
 export async function generateQuestions(userContent: string) {
   const apiKey = process.env.OPENAI_KEY;
   const client = new OpenAI({
@@ -37,9 +46,9 @@ export async function generateQuestions(userContent: string) {
     messages: messages,
     response_format: { type: "json_object" }
   });
-  const parsed = JSON.parse(response.choices[0].message.content ?? "");
+  const parsed = JSON.parse(response.choices[0].message.content ?? "{}") as GeneratedContent;
   console.log(JSON.stringify(parsed, null, 2));
-  return parsed
+  return parsed;
 }
 
 
