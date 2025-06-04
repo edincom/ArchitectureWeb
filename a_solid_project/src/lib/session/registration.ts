@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z, ZodError } from 'zod';
 import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client'
 import { action, redirect } from '@solidjs/router';
@@ -10,7 +10,7 @@ export const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   name: z.string().min(5),
   password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
-  phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, {message: "Invalid phone number format"}),
+  phone: z.string().regex(/^\+?[1-9]\d{1,14}$/, { message: "Invalid phone number format" }),
   profession: z.string()
 });
 
@@ -28,8 +28,11 @@ export async function register(form: FormData) {
       profession: form.get('profession')
     });
   } catch (err) {
-    console.error('Invalid data:', err);
-    throw new Error('Données invalides');
+    if (err instanceof ZodError) {
+      console.error('Validation errors:', err.flatten());
+      throw new Error(JSON.stringify(err.flatten()));
+    }
+    throw new Error('Unexpected validation error');
   }
 
   user.password = await bcrypt.hash(user.password, 10);

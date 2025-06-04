@@ -10,8 +10,24 @@ export default function Register() {
     <LayoutCon protected>
       <main class="text-center text-gray-700 p-8 max-w-md bg-white rounded-lg shadow-lg -ml-32">
         <h1 class="text-4xl md:text-6xl text-sky-700 font-thin uppercase mb-8">WELCOME TO STAK</h1>
-        <Show when={submission.error}>
+        {/* <Show when={submission.error}>
           <p class="text-red-500 mb-4">Error: {submission.error.message}</p>
+        </Show> */}
+        <Show when={submission.error}>
+          <pre class="text-red-500 text-left whitespace-pre-wrap mb-4">
+            Error: {
+              (() => {
+                try {
+                  const parsed = JSON.parse(submission.error.message);
+                  return Object.entries(parsed.fieldErrors)
+                    .map(([field, errors]) => `${field}: ${(errors as string[]).join(', ')}`)
+                    .join('\n');
+                } catch (e) {
+                  return submission.error.message;
+                }
+              })()
+            }
+          </pre>
         </Show>
 
         <form method='post' class="flex flex-col gap-4" action={registerAction}>
