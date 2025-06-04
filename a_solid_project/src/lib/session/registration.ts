@@ -46,7 +46,7 @@ export async function register(form: FormData) {
     });
 
     console.log("New user created:", newUser.id);
-    return { id: newUser.id, email: newUser.email }; // optional: return basic info
+    return { id: newUser.id, email: newUser.email };
   } catch (err: any) {
     if (err.code === "P2002") {
       throw new Error("A user with this email already exists");
@@ -56,10 +56,6 @@ export async function register(form: FormData) {
     throw err;
   }
 }
-
-
-
-
 export const registerAction = action(async (formData: FormData) => {
   'use server'
   await register(formData)

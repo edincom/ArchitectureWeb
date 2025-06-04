@@ -5,8 +5,8 @@ export async function POST(event: APIEvent) {
   console.log("POST /api/register");
 
   try {
-    const formData = await event.request.formData(); // Works with browser and Expo if FormData is sent
-    const result = await register(formData); // Still passes the FormData object
+    const formData = await event.request.formData();
+    const result = await register(formData); 
     console.log("result", result);
 
     return new Response(JSON.stringify(result), {
