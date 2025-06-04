@@ -11,7 +11,8 @@ export default function Create() {
   return (
     <Layout protected>
       <main class="mt-20 mx-auto text-gray-700 p-8 max-w-md bg-white rounded-lg shadow-lg">
-        <h1 class="text-4xl md:text-6xl text-sky-700 font-thin uppercase mb-8">Create your flashcards</h1>
+        
+        <h1 class="text-4xl md:text-4xl text-sky-700 font-thin uppercase mb-8">Create here</h1>
         <Show when={submission.error}>
           <p class="text-red-500 mb-4">Error: {submission.error.message}</p>
         </Show>

@@ -3,58 +3,56 @@ import { getUserInfo, updateUserInfoAction } from "~/lib/server";
 import Layout from "~/components/Layout";
 import { getUser } from "~/lib/session/session";
 
-
 export default function Profile() {
   const user = createAsync(() => getUser());
-  const mail = () => user()?.email
+  const mail = () => user()?.email;
   const userInfo = createAsyncStore(() => getUserInfo(mail()), {
-    initialValue: null
+    initialValue: null,
   });
-  const updating = useSubmission(updateUserInfoAction)
+  const updating = useSubmission(updateUserInfoAction);
 
   return (
     <Layout protected>
-      <main class="text-center mx-auto text-gray-700 p-4 max-w-md">
-        <h1 class="text-4xl text-sky-700 font-semibold uppercase mb-8">Profile</h1>
+      <main class="mx-auto text-gray-700 p-6 max-w-lg bg-white shadow-xl rounded-2xl">
+        <h1 class="text-4xl text-sky-600 font-light uppercase mb-10 text-center">Profile</h1>
 
-        <form method="post" action={updateUserInfoAction} class="space-y-4">
+        <form method="post" action={updateUserInfoAction} class="space-y-6">
           <input type="hidden" name="email" value={mail()} />
 
-          <div class="text-left">
-            <label class="block text-sm font-medium text-gray-600">Phone</label>
+          <div>
+            <label class="block text-sm font-semibold text-gray-600 mb-1">Phone</label>
             <input
               name="phone"
               value={userInfo()?.phone || ""}
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200 px-3 py-2"
+              class="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-300 shadow-sm"
             />
           </div>
 
-          <div class="text-left">
-            <label class="block text-sm font-medium text-gray-600">Name</label>
+          <div>
+            <label class="block text-sm font-semibold text-gray-600 mb-1">Name</label>
             <input
               name="name"
               value={userInfo()?.name || ""}
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200 px-3 py-2"
+              class="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-300 shadow-sm"
             />
           </div>
 
-          <div class="text-left">
-            <label class="block text-sm font-medium text-gray-600">Profession</label>
+          <div>
+            <label class="block text-sm font-semibold text-gray-600 mb-1">Profession</label>
             <input
               name="profession"
               value={userInfo()?.profession || ""}
-              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring focus:ring-blue-200 px-3 py-2"
+              class="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-300 shadow-sm"
             />
           </div>
 
-          <div class="text-center">
+          <div class="text-center pt-4">
             <button
               type="submit"
-              class="mt-4 inline-block rounded-full bg-sky-600 hover:bg-sky-700 text-white px-6 py-2 transition-all shadow-md"
+              class="rounded-full bg-sky-500 hover:bg-sky-600 text-white font-semibold px-6 py-3 shadow-md transition duration-200"
+              disabled={updating.pending}
             >
-                {updating.pending
-                ? "Saving..."
-                : "Save Changes"}
+              {updating.pending ? "Saving..." : "Save Changes"}
             </button>
           </div>
         </form>

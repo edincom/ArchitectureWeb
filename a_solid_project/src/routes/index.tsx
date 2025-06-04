@@ -1,8 +1,17 @@
-import { deleteCardsAction, getCards, getCardsUser } from "~/lib/server";
+import {
+  deleteCardsAction,
+  getCards,
+  getCardsUser,
+} from "~/lib/server";
 import Layout from "~/components/Layout";
 import Sheet from "~/components/Sheet";
 import { getUser, logoutAction } from "~/lib/session/session";
-import { createAsync, createAsyncStore, useSubmission, type RouteDefinition, } from "@solidjs/router";
+import {
+  createAsync,
+  createAsyncStore,
+  useSubmission,
+  type RouteDefinition,
+} from "@solidjs/router";
 import { For } from "solid-js";
 
 export const route = {
@@ -13,11 +22,11 @@ export const route = {
 
 export default function Home() {
   const user = createAsync(() => getUser());
-  const owner = () => user()?.email
+  const owner = () => user()?.email;
   const cards = createAsyncStore(() => getCardsUser(owner()), {
     initialValue: [],
   });
-  const deletingCards = useSubmission(deleteCardsAction)
+  const deletingCards = useSubmission(deleteCardsAction);
 
   const filteredCards = () =>
     cards().filter((card) => {
@@ -27,19 +36,25 @@ export default function Home() {
 
   return (
     <Layout protected>
-      <main class="text-center mx-auto text-gray-700 p-4">
-        <h1 class="max-6-xs text-6xl text-sky-700 font-thin uppercase my-16">STAK</h1>
+      <main class="text-white bg-background min-h-screen py-10 px-4">
+        <h1 class="text-4xl md:text-3xl font-bold uppercase text-highlight text-center mb-12">
+          List of decks
+        </h1>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 md:px-8">
           <For each={filteredCards()}>
-            {(card) => <Sheet card={card} showDelete />}
+            {(card) => (
+              <div class="bg-accent text-white rounded-xl shadow-md p-4 transition hover:scale-[1.02]">
+                <Sheet card={card} showDelete />
+              </div>
+            )}
           </For>
-        </div>
+        </section>
 
-        <form method="post" action={logoutAction} class="mt-12">
+        <form method="post" action={logoutAction} class="mt-16 text-center">
           <button
             type="submit"
-            class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full shadow-md transition duration-200"
+            class="bg-primary hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-200"
           >
             🔒 Log out
           </button>

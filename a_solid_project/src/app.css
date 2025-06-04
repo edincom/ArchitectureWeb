@@ -1,20 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background-rgb: 214, 219, 220;
-  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 30, 58, 138; /* #1e3a8a */
+  --foreground-rgb: 255, 255, 255; /* #fff */
+  --primary: #1d4ed8;
+  --accent: #0ea5e9;
+  --highlight: #facc15;
+  --muted: #94a3b8; /* Tailwind slate-400 */
+  --error: #dc2626;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-rgb: 255, 255, 255;
-    --foreground-rgb: 0, 0, 0;
+    --background-rgb: 15, 23, 42; /* #0f172a (Tailwind slate-900) */
+    --foreground-rgb: 255, 255, 255;
   }
 }
 
 body {
-  background: rgb(var(--background-rgb));
+  background-color: rgb(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
+  font-family: 'Inter', sans-serif;
 }
 
 
