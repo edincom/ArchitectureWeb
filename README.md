@@ -1,1 +1,4 @@
-Project for the Web Architecture course
+##Web Architecture course project
+
+This includes the backend for the mobile project
+
