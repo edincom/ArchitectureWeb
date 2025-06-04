@@ -14,23 +14,25 @@ export const userSchema = z.object({
   profession: z.string()
 });
 
+
 export async function register(form: FormData) {
-  'use server'
-  let user: z.infer<typeof userSchema>
+  'use server';
+  let user;
 
   try {
     user = userSchema.parse({
       email: form.get('email'),
       name: form.get('name'),
       password: form.get('password'),
-      phone: form.get('number'),
+      phone: form.get('phone'),
       profession: form.get('profession')
     });
-  } catch {
-    throw new Error('Données invalides')
+  } catch (err) {
+    console.error('Invalid data:', err);
+    throw new Error('Données invalides');
   }
 
-  user.password = await bcrypt.hash(user.password, 10)
+  user.password = await bcrypt.hash(user.password, 10);
 
   try {
     const newUser = await prisma.user.create({
@@ -43,16 +45,20 @@ export async function register(form: FormData) {
       }
     });
 
-    console.log("New user created", newUser.id);
+    console.log("New user created:", newUser.id);
+    return { id: newUser.id, email: newUser.email }; // optional: return basic info
   } catch (err: any) {
-    //Handle duplicate email
-    if (err.code == "P2002") {
-      throw new Error("A user with this mail already exists");
+    if (err.code === "P2002") {
+      throw new Error("A user with this email already exists");
     }
-    console.error("Registration:", err);
+
+    console.error("Registration failed:", err);
     throw err;
   }
 }
+
+
+
 
 export const registerAction = action(async (formData: FormData) => {
   'use server'

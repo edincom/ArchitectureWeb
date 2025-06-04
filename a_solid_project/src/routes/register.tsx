@@ -33,7 +33,7 @@ export default function Register() {
 
           <input
             type="text"
-            name="number"
+            name="phone"
             placeholder="Phone number"
             class="p-3 border border-gray-300 rounded"
             required
